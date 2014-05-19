@@ -11,12 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140519020350) do
+ActiveRecord::Schema.define(version: 20140519023136) do
+
+  create_table "priorities", force: true do |t|
+    t.string "priority_num", limit: 1
+  end
 
   create_table "tasks", force: true do |t|
     t.text     "todo"
     t.date     "input_date"
-    t.date     "due_dat"
+    t.date     "due_date"
     t.integer  "priority"
     t.text     "memo"
     t.datetime "created_at"
