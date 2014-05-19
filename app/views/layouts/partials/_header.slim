@@ -3,3 +3,4 @@ div
 		div.container-fluid
 			div.navbar-header
 				a.navbar-brand = button_to 'Todo App', root_path, method: 'get'
+		div.alert-info = flash[:notice]

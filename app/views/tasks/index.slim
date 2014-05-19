@@ -3,7 +3,22 @@ div.container
 		div.panel-heading
 			h1.panel-title Todo Items
 		div.panel-body
+			h5 = button_to('Add Todo Item', new_task_path, method: 'get')
 			table.table.table-bordered.table-striped
+				tr
+					th Todo
+					th Input Date
+					th Due Date
+					th Priority
+					th Memo
+					th Update Date
 				- @tasks.each do |task|
 					tr
-						th = task.todo
+						td = task.todo
+						td = task.created_at.to_date
+						td = !task.due_date.nil? ? task.due_date.to_date : 'Not Set'
+						td = !task.priority.nil? ? task.priority.priority_num : 'Not Set'
+						td = task.memo
+						td = task.updated_at.to_date
+						td = button_to('edit', edit_task_path(task), method: 'get')
+						td = button_to('delete', task_path(task), method: 'delete', confirm: 'Confirm Delete?')
