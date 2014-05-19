@@ -3,7 +3,8 @@ div.container
 		div.panel-heading
 			h1.panel-title Todo Items
 		div.panel-body
-			h5 = button_to('Add Todo Item', new_task_path, method: 'get')
+			= button_to('Add Todo Item', new_task_path, method: 'get')
+			br
 			table.table.table-bordered.table-striped
 				tr
 					th Todo
