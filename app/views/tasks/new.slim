@@ -3,4 +3,4 @@ div.container
 		div.panel-heading
 			h1.panel-title Add New Todo Item
 		div.panel-body
-			= render partial: 'form', locals: { task: @task }
+			= render partial: 'form', locals: { task: @task, priorities: @priorities }

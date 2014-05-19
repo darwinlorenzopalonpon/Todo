@@ -1,6 +1,8 @@
 class Task < ActiveRecord::Base
   default_scope { order('due_date ASC') }
 
-  has_one :prioritization, class_name: 'Prioritization', as: :item
-  has_one :priority, through: :prioritization
+  belongs_to :priority
+  
+  validates_presence_of :todo
+  accepts_nested_attributes_for :priority
 end

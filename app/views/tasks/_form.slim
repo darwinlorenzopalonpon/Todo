@@ -1,4 +1,8 @@
 = form_for @task do |f|
+	div.errors
+		- if @task.errors.any?
+			- @task.errors.full_messages.each do |msg|
+				li = msg
 	table.table.table-bordered
 		tr
 			th Todo
@@ -8,6 +12,6 @@
 		tr
 			td = f.text_field(:todo)
 			td = f.text_area(:memo, size: '30x10')
-			td = f.select(:priority, @priorities.map{ |p| [p[:priority_num], p[:id]] })
+			td = f.select(:priority_id, @priorities.map{ |p| [p[:priority_num], p[:id]] })
 			td = f.date_field(:due_date)
 	= f.submit 'Save'
