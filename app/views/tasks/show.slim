@@ -1,16 +1,12 @@
-<%= @task.inspect %>
-
-<%= link_to 'Destroy', @task, :confirm => 'Are you sure?', :method => :delete %>
-
 div.container
 	div.panel.panel-info
 		div.panel-heading
 			h1.panel-title Show Item
 		div.panel-body
-      h5 = @task.todo
-      dl
-        dt = 'Input Date'
-        dl = @task.created_at.to_date
-        dt = 'Due Date'
-        dl = @task.due_date.to_date
+			h5 = @task.todo
+			dl.klist
+				dt = 'Input Date'
+				dl = @task.created_at.to_date
+				dt = 'Due Date'
+				dl = @task.due_date.to_date
     

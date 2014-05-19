@@ -1,8 +1,8 @@
 div.container
-	div.panel.panel-info
-		div.panel-heading
-			h1.panel-title Edit Todo Item
-		div.panel-body
-			= button_to 'Back to Index', tasks_path, method: 'get'
-			br
-			= render partial: 'form', locals: { task: @task }
+  div.panel.panel-info
+    div.panel-heading
+      h1.panel-title Edit Todo Item
+    div.panel-body
+      = button_to 'Back to Index', tasks_path, method: 'get'
+      br
+      = render partial: 'form', locals: { task: @task }

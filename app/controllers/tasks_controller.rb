@@ -14,11 +14,14 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @priorities = Priority.all
     @task.priority = Priority.find(params[:task][:priority_id])
-    if @task.save
-      flash[:notice] = "Item succesfully saved."
-      redirect_to tasks_path
+    if @task.valid?
+      if(params[:confirm])
+        @task.save! rescue render :new
+        render "completion"
+      else
+        render "confirm"
+      end
     else
-      flash[:notice] = "Item not saved."
       render :new
     end
   end
@@ -35,8 +38,14 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     @priorities = Priority.all
-    if @task.update_attributes(params.require(:task).permit(:todo, :due_date, :priority_id, :memo))
-      redirect_to tasks_path
+    @task.assign_attributes(params.require(:task).permit(:todo, :due_date, :priority_id, :memo))
+    if @task.valid?
+      if(params[:confirm])
+        @task.save! rescue render :edit
+        render "completion"
+      else
+        render "confirm"
+      end
     else
       render :edit
     end

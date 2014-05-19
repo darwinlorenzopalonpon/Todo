@@ -1,0 +1,21 @@
+div.container
+  div.panel.panel-info
+    div.panel-heading
+      h1.panel-title Save this setting?
+    div.panel-body
+      ul.list
+        li = "Todo: #{@task.todo}"
+        li = "Input Date: #{@task.created_at ? @task.created_at.to_date : Time.now.to_date}"
+        li = "Due Date: #{!@task.due_date.nil? ? @task.due_date.to_date : 'Not Set'}"
+        li = "Priority: #{!@task.priority.nil? ? @task.priority.priority_num : 'Not Set'}"
+        li = "Memo: #{@task.memo}"
+        li = "Updated_at: #{Time.now.to_date}"
+        = form_for @task do |f|
+          = f.hidden_field(:todo)
+          = f.hidden_field(:memo)
+          = f.hidden_field(:priority_id)
+          = f.hidden_field(:due_date)
+          = hidden_field_tag(:confirm, 1)
+          = f.submit 'confirm'
+          = link_to 'cancel', tasks_path, class: "btn"
+    
