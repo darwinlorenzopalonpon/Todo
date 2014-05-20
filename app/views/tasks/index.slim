@@ -9,7 +9,7 @@ div.container
       p
         = "items per page: "
         = form_tag tasks_path, method: 'get' do
-          = select_tag :per, options_for_select([10, 20, 30, 50], selected: params[:per] || 10), onchange: "this.form.submit();"
+          = select_tag :per_page, options_for_select([10, 20, 30, 50], controller.per_page), onchange: "this.form.submit()"
       br
       div.search_panel
         = form_tag tasks_path, :method => 'get' do

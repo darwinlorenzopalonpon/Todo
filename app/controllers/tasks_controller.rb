@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   layout 'application'
 
   def index
-    @tasks = Task.search(params[:search]).order_by(params[:sort], params[:direction]).page(params[:page]).per(params[:per])
+    @tasks = Task.search(params[:search]).order_by(params[:sort], params[:direction]).paginated_for_index(per_page, page)
   end
 
   def new
@@ -63,6 +63,14 @@ class TasksController < ApplicationController
       flash[:notice] = e.message
     end
     redirect_to tasks_path
+  end
+
+  def per_page
+    params[:per_page] ||= 10
+  end
+
+  def page
+    params[:page] ||= 1
   end
 
   private
