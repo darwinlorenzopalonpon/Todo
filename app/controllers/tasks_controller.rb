@@ -2,7 +2,8 @@ class TasksController < ApplicationController
   layout 'application'
 
   def index
-    @tasks = Task.search(params[:search]).order_by(params[:sort], params[:direction]).paginated_for_index(per_page, page)
+    @search = Task.search(params[:q])
+    @tasks = @search.result.order_by(params[:sort], params[:direction]).paginated_for_index(per_page, page)
   end
 
   def new

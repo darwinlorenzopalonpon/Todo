@@ -12,14 +12,10 @@ div.container
           = select_tag :per_page, options_for_select([10, 20, 30, 50], controller.per_page), onchange: "this.form.submit()"
       br
       div.search_panel
-        = form_tag tasks_path, :method => 'get' do
-          p
-            = text_field_tag :search, params[:search]
-            = submit_tag "Search"
-        - unless params[:search].nil?
-          div.specify
-            span = "Result Count: #{@tasks.count}"
-      = page_entries_info @tasks
+        = search_form_for @search, url: tasks_path, method: :get do |f|
+          = f.label :todo_or_memo_cont, "Name contains"
+          = f.text_field :todo_or_memo_cont
+          = f.submit "Search"
       table.table.table-bordered.table-striped
         tr
           th = sortable "todo", "Todo"

@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   root 'tasks#index'
 
   resources :tasks do
-
   end
 
   # Example of regular route:
