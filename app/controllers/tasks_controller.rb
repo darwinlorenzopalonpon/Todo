@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   layout 'application'
 
   def index
-    @tasks = (params[:search].nil? ? Task.all : Task.search(params[:search])).paginate(:page => params[:page], :per_page => 5)
+    @tasks = (params[:search].nil? ? Task.all : Task.search(params[:search])).paginated_for_index(per_page, page)
   end
 
   def new
@@ -13,8 +13,10 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @priorities = Priority.all
-    @task.priority = Priority.find(params[:task][:priority_id])
-  rescue ActiveRecord::RecordNotFound
+    begin
+      @task.priority = Priority.find(params[:task][:priority_id])
+    rescue ActiveRecord::RecordNotFound
+    end
     if @task.valid?
       if(params[:confirm])
         @task.save! rescue render :new
@@ -68,4 +70,13 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:todo, :memo, :due_date)
   end
+
+  def per_page
+    params[:per_page] ||= 10
+  end
+
+  def page
+    params[:page] ||= 1
+  end
+
 end
