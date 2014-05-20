@@ -4,6 +4,7 @@ div.container
       h1.panel-title Todo Items
     div.panel-body
       = button_to('Add Todo Item', new_task_path, method: 'get')
+      = button_to 'Back to Index', tasks_path, method: 'get' unless params[:search].nil?
       br
       p
         = "items per page: "
@@ -21,12 +22,12 @@ div.container
       = page_entries_info @tasks
       table.table.table-bordered.table-striped
         tr
-          th Todo
-          th Input Date
-          th Due Date
-          th Priority
-          th Memo
-          th Update Date
+          th = sortable "Todo"
+          th = sortable "created_at", "Input Date"
+          th = sortable "due_date", "Due Date"
+          th = sortable "priority_id", "Priority"
+          th = sortable "memo", "Memo"
+          th = sortable "updated_at", "Update Date"
         - @tasks.each do |task|
           tr
             td = task.todo
