@@ -7,7 +7,7 @@ module ApplicationHelper
   end
   
   def sort_column
-    Task.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    Task.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
 
   def sort_direction
