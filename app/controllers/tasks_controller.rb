@@ -14,6 +14,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @priorities = Priority.all
     @task.priority = Priority.find(params[:task][:priority_id])
+  rescue ActiveRecord::RecordNotFound
     if @task.valid?
       if(params[:confirm])
         @task.save! rescue render :new
@@ -55,7 +56,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     begin
       @task.destroy
-      flash[:success] = "Task was destroyed." 
+      flash[:success] = "Task was destroyed."
     rescue Exception => e
       flash[:notice] = e.message
     end
