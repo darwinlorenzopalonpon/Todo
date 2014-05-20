@@ -14,7 +14,7 @@ class Task < ActiveRecord::Base
   end
 
   def self.paginated_for_index(tasks_per_page, current_page)
-    paginate(per_page: tasks_per_page, page: current_page)
+    page(current_page).per(tasks_per_page)
   end
 
   def self.order_by(column, direction = 'ASC')

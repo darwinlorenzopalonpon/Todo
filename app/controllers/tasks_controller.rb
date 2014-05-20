@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   layout 'application'
 
   def index
-    @tasks = Task.search(params[:search]).order_by(params[:sort], params[:direction]).paginated_for_index(per_page, page)
+    @tasks = Task.search(params[:search]).order_by(params[:sort], params[:direction]).page(params[:page]).per(params[:per])
   end
 
   def new
@@ -71,11 +71,4 @@ class TasksController < ApplicationController
     params.require(:task).permit(:todo, :memo, :due_date)
   end
 
-  def per_page
-    params[:per_page] ||= 10
-  end
-
-  def page
-    params[:page] ||= 1
-  end
 end
