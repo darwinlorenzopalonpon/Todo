@@ -13,7 +13,7 @@ div.container
       br
       div.search_panel
         = search_form_for @search, url: tasks_path, method: :get do |f|
-          = f.label :todo_or_memo_cont, "Name contains"
+          = f.label :todo_or_memo_cont, "Search: "
           = f.text_field :todo_or_memo_cont
           = f.submit "Search"
       table.table.table-bordered.table-striped
