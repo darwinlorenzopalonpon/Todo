@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   layout 'application'
 
   def index
-    @tasks = Task.all
+    @tasks = (params[:search].nil? ? Task.all : Task.search(params[:search])).paginate(:page => params[:page], :per_page => 5)
   end
 
   def new
